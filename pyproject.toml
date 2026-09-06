@@ -3,13 +3,13 @@ requires = ["setuptools>=75", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "trexzo-uav"
+name = "uav-automation-service"
 version = "2.0.0"
 description = "Configurable Discord automation and market-data service"
 readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "MIT"}
-authors = [{name = "Trexzo"}]
+authors = [{name = "UAV Automation Service contributors"}]
 dependencies = [
   "discord.py>=2.5,<2.8",
   "Flask>=3.1,<3.2",
@@ -19,13 +19,13 @@ dependencies = [
 ]
 
 [project.scripts]
-trexzo-uav = "trexzo_uav.main:main"
+uav-service = "uav_service.main:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=8.3,<9", "build>=1.2,<2"]
 
 [tool.setuptools.packages.find]
-include = ["trexzo_uav*"]
+include = ["uav_service*"]
 
 [tool.pytest.ini_options]
 addopts = "-q"

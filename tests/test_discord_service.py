@@ -30,7 +30,7 @@ if "flask" not in sys.modules:
     sys.modules["flask_cors"] = flask_cors
 
 
-# Lightweight discord.py stubs let us exercise TrexzoBot's internal ordering
+# Lightweight discord.py stubs let us exercise UAVBot's internal ordering
 # and duplicate handling without network access or third-party installation.
 if "discord" not in sys.modules:
     discord = types.ModuleType("discord")
@@ -113,7 +113,7 @@ if "discord" not in sys.modules:
         "discord.ext.commands": commands,
     })
 
-from trexzo_uav.discord_service import TrexzoBot
+from uav_service.discord_service import UAVBot
 
 
 class DiscordServiceTests(unittest.IsolatedAsyncioTestCase):
@@ -126,7 +126,7 @@ class DiscordServiceTests(unittest.IsolatedAsyncioTestCase):
                 time.sleep(0.01)
                 return []
 
-        bot = TrexzoBot(Engine(), SimpleNamespace(is_set=lambda: False, set=lambda: None))
+        bot = UAVBot(Engine(), SimpleNamespace(is_set=lambda: False, set=lambda: None))
         first = SimpleNamespace(id=1, embeds=[SimpleNamespace(title="first")])
         second = SimpleNamespace(id=2, embeds=[SimpleNamespace(title="second")])
         await asyncio.gather(
@@ -148,7 +148,7 @@ class DiscordServiceTests(unittest.IsolatedAsyncioTestCase):
                     raise RuntimeError("temporary failure")
                 return []
 
-        bot = TrexzoBot(Engine(), SimpleNamespace(is_set=lambda: False, set=lambda: None))
+        bot = UAVBot(Engine(), SimpleNamespace(is_set=lambda: False, set=lambda: None))
         message = SimpleNamespace(id=9, embeds=[SimpleNamespace(title="retry")])
         with self.assertRaises(RuntimeError):
             await bot._process_source_embeds(message)
@@ -170,7 +170,7 @@ class DiscordServiceTests(unittest.IsolatedAsyncioTestCase):
                         raise RuntimeError("temporary second-embed failure")
                 return []
 
-        bot = TrexzoBot(Engine(), SimpleNamespace(is_set=lambda: False, set=lambda: None))
+        bot = UAVBot(Engine(), SimpleNamespace(is_set=lambda: False, set=lambda: None))
         message = SimpleNamespace(
             id=42,
             embeds=[SimpleNamespace(title="good"), SimpleNamespace(title="bad")],
@@ -181,7 +181,7 @@ class DiscordServiceTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(calls, ["good", "bad", "bad"])
 
     def test_source_id_cache_is_bounded(self) -> None:
-        bot = TrexzoBot(SimpleNamespace(), SimpleNamespace())
+        bot = UAVBot(SimpleNamespace(), SimpleNamespace())
         for message_id in range(6000):
             self.assertTrue(bot._mark_source_message(message_id))
         self.assertEqual(len(bot._processed_source_ids), 5000)

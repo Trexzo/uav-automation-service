@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from trexzo_uav.engine import AutomationEngine
+from uav_service.engine import AutomationEngine
 
 
 def profile() -> dict:

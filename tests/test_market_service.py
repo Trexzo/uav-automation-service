@@ -44,7 +44,7 @@ except ImportError:
     flask_cors_module.CORS = lambda app: app
     sys.modules["flask_cors"] = flask_cors_module
 
-from trexzo_uav import market_service
+from uav_service import market_service
 
 
 class MarketServiceTests(unittest.TestCase):

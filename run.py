@@ -1,3 +1,3 @@
-from trexzo_uav.main import main
+from uav_service.main import main
 
 raise SystemExit(main())

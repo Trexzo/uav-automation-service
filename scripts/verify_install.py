@@ -5,11 +5,11 @@ import json
 import sqlite3
 from pathlib import Path
 
-from trexzo_uav.profile import load_profile
+from uav_service.profile import load_profile
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Verify Trexzo UAV configuration and runtime data")
+    parser = argparse.ArgumentParser(description="Verify UAV Automation Service configuration and runtime data")
     parser.add_argument("--profile", type=Path, default=Path("config/profile.json"))
     parser.add_argument("--data-dir", type=Path, default=Path("data"))
     parser.add_argument("--skip-db", action="store_true")

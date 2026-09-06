@@ -34,7 +34,7 @@ def _format_trade_lines(trades: Iterable[dict], player: bool = False) -> str:
     return "\n".join(lines)
 
 
-class TrexzoBot(commands.Bot):
+class UAVBot(commands.Bot):
     def __init__(self, engine: AutomationEngine, shutdown_event) -> None:
         intents = discord.Intents.default()
         intents.guilds = True
@@ -270,8 +270,8 @@ class TrexzoBot(commands.Bot):
         await self.process_commands(message)
 
 
-def create_bot(engine: AutomationEngine, shutdown_event) -> TrexzoBot:
-    bot = TrexzoBot(engine, shutdown_event)
+def create_bot(engine: AutomationEngine, shutdown_event) -> UAVBot:
+    bot = UAVBot(engine, shutdown_event)
 
     async def item_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
         names = await asyncio.to_thread(queries.search_items, current, 20)
@@ -282,7 +282,7 @@ def create_bot(engine: AutomationEngine, shutdown_event) -> TrexzoBot:
         await interaction.response.defer(thinking=True)
         status = await asyncio.to_thread(queries.get_status)
         text = (
-            f"**Trexzo status**\n"
+            f"**Service status**\n"
             f"Trades: **{status['total_trades']:,}**\n"
             f"Backfilled items: **{status['backfilled_items']:,}**\n"
             f"Latest trade: `{status['latest_trade'] or 'none'}`\n"

@@ -20,7 +20,7 @@ The public repository deliberately contains **no deployment-specific monitoring 
 
 ```text
 .
-├── trexzo_uav/            # application package
+├── uav_service/            # application package
 ├── config/
 │   └── profile.example.json
 ├── examples/data/         # synthetic catalog examples only
@@ -52,13 +52,13 @@ For a configuration-only installation with no market scraper, leave `SCRAPER_ENA
 Run the service with:
 
 ```bash
-trexzo-uav
+uav-service
 ```
 
 or:
 
 ```bash
-python -m trexzo_uav
+python -m uav_service
 ```
 
 ## Configuration model
@@ -110,7 +110,7 @@ Tags matching `v*` trigger the release workflow. GitHub Actions runs the test an
 
 ## Deployment
 
-`systemd/trexzo-uav.service` is a hardened example unit. Adjust its paths and service account for your host. Keep the deployment environment file outside the repository and place writable data/state in a dedicated directory.
+`systemd/uav-automation-service.service` is a hardened example unit. Adjust its paths and service account for your host. Keep the deployment environment file outside the repository and place writable data/state in a dedicated directory.
 
 ## Security and privacy
 

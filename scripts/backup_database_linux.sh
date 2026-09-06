@@ -2,7 +2,7 @@
 set -euo pipefail
 umask 027
 
-DATA_DIR="${DATA_DIR:-/srv/trexzo}"
+DATA_DIR="${DATA_DIR:-/srv/uav-automation-service}"
 SOURCE="$DATA_DIR/entiredatabase.db"
 BACKUP_DIR="$DATA_DIR/backups"
 STAMP="$(date -u +%Y%m%dT%H%M%SZ)"

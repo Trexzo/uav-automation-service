@@ -135,7 +135,7 @@ def _deliver(session: requests.Session, job: WebhookJob, shutdown_event: threadi
 
 def webhook_worker(shutdown_event: threading.Event) -> None:
     session = requests.Session()
-    session.headers.update({"User-Agent": "Trexzo-UAV/2.0"})
+    session.headers.update({"User-Agent": "UAV-Automation-Service/2.0"})
     logger.info("Webhook worker started")
     while not shutdown_event.is_set() or not _webhook_queue.empty():
         try:

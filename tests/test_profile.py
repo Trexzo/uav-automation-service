@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from trexzo_uav.profile import ProfileError, load_profile
+from uav_service.profile import ProfileError, load_profile
 
 
 def test_example_profile_loads() -> None:

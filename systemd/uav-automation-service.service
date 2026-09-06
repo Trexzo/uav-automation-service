@@ -1,17 +1,17 @@
 [Unit]
-Description=Trexzo UAV automation service
+Description=UAV automation and market-data service
 After=network-online.target
 Wants=network-online.target
 
 [Service]
 Type=simple
-User=trexzo
-Group=trexzo
-WorkingDirectory=/opt/trexzo-uav
-EnvironmentFile=/etc/trexzo-uav/trexzo-uav.env
+User=uavsvc
+Group=uavsvc
+WorkingDirectory=/opt/uav-automation-service
+EnvironmentFile=/etc/uav-automation-service/service.env
 Environment=PYTHONDONTWRITEBYTECODE=1
 Environment=PYTHONUNBUFFERED=1
-ExecStart=/opt/trexzo-uav/.venv/bin/trexzo-uav
+ExecStart=/opt/uav-automation-service/.venv/bin/uav-service
 Restart=on-failure
 RestartSec=5
 TimeoutStopSec=90
@@ -20,7 +20,7 @@ NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=strict
 ProtectHome=true
-ReadWritePaths=/var/lib/trexzo-uav
+ReadWritePaths=/var/lib/uav-automation-service
 
 [Install]
 WantedBy=multi-user.target

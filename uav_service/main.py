@@ -65,7 +65,7 @@ def main() -> int:
     if errors:
         for error in errors:
             logger.error(error)
-        logger.error("Copy .env.example to .env or configure /etc/trexzo/trexzo.env")
+        logger.error("Copy .env.example to .env or configure /etc/uav-automation-service/service.env")
         return 2
 
     missing_webhooks = [
@@ -157,7 +157,7 @@ def main() -> int:
         # API were joined. Give it the final remaining budget.
         _join_thread(webhook_thread, timeout=remaining(30))
         market_service.close_thread_connection()
-        logger.info("Trexzo application stopped")
+        logger.info("Application stopped")
 
     return return_code
 
