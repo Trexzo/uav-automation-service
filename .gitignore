@@ -1,0 +1,26 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+*.log
+
+# Deployment-specific rules and runtime state
+config/profile.json
+config/private/
+runtime/
+
+# Deployment catalog, runtime database and backups
+data/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

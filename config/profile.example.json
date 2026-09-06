@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "message_format": {
+    "player_pattern": ":notice:\\s*(?P<subject>.*?)\\s+received\\s+.*$",
+    "drop_pattern": "received\\s+x?\\d+.*from\\s+.+\\(\\d+\\s+kc\\)"
+  },
+  "routes": {
+    "route_primary": {
+      "webhook_env": "WEBHOOK_ROUTE_PRIMARY",
+      "mention_env": "ROLE_ROUTE_PRIMARY"
+    },
+    "route_secondary": {
+      "webhook_env": "WEBHOOK_ROUTE_SECONDARY",
+      "mention_env": "ROLE_ROUTE_SECONDARY"
+    },
+    "route_control": {
+      "webhook_env": "WEBHOOK_ROUTE_CONTROL"
+    }
+  },
+  "control_reply_route": "route_control",
+  "counter_reply_route": "route_control",
+  "simulation_command": "test",
+  "simulation_markers": [":notice:", "received"],
+  "rules": [
+    {
+      "name": "sample_drop_rule",
+      "route": "route_primary",
+      "contains_any": ["sample source"],
+      "contains_none": ["ignored sample"],
+      "require_drop": true,
+      "mention": true
+    },
+    {
+      "name": "sample_announcement_rule",
+      "route": "route_secondary",
+      "contains_any": ["sample announcement"],
+      "mention": false
+    }
+  ],
+  "timed_rules": [
+    {
+      "name": "sample_timed_rule",
+      "route": "route_secondary",
+      "contains_any": ["sample timed event"],
+      "label": "Configured event active",
+      "duration_seconds": 3600,
+      "mention": true,
+      "dm_owner": false,
+      "template": "{label} — {expires}"
+    }
+  ],
+  "counters": [
+    {
+      "name": "sample_rewards",
+      "route": "route_secondary",
+      "title": "Configured reward totals",
+      "daily_title": "Daily configured rewards",
+      "rewards": {
+        "sample reward": "Sample Reward"
+      },
+      "fusion_rewards": [],
+      "totals_aliases": ["rewards"],
+      "daily_aliases": ["rewardsdaily"]
+    }
+  ],
+  "named_lists": [
+    {
+      "name": "tracked_group",
+      "state_file": "tracked_group.json",
+      "route": "route_primary",
+      "aliases": ["group"],
+      "contains_none": ["ignored location"],
+      "require_drop": true,
+      "mention": true
+    }
+  ],
+  "rotations": [
+    {
+      "name": "sample_cycle",
+      "state_file": "sample_cycle.json",
+      "route": "route_secondary",
+      "aliases": ["setcycle"],
+      "locations": ["A", "B", "C"],
+      "triggers": ["sample cycle in 5 min", "sample cycle in 1 min"],
+      "advance_contains": ["1 min"],
+      "mention": true,
+      "template": "{message} Location: {location}"
+    }
+  ],
+  "history_counters": [
+    {
+      "name": "sample_metric",
+      "aliases": ["samplecount"],
+      "route": "route_control",
+      "search_term": "sample reward",
+      "after": "2026-01-01T00:00:00+00:00",
+      "label": "Configured historical count",
+      "quantity_pattern": "(?:\\b(\\d+)x\\b|\\bx(\\d+)\\b)",
+      "default_quantity": 0
+    }
+  ]
+}
