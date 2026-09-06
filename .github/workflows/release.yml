@@ -18,9 +18,7 @@ jobs:
           python-version: "3.11"
           cache: pip
       - run: python -m pip install -e .[dev]
-      - run: cp config/profile.example.json config/profile.json
       - run: pytest
-      - run: rm config/profile.json
       - run: python scripts/security_scan.py
       - run: python -m build
       - name: Create GitHub release
